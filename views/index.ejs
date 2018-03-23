@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Codystar" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <title>Searchable Images</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col s6">
+        <h1>Imagebox</h1>
+      </div>
+      <div id="search-box" class="col s6">
+      </div>
+    </div>
+  
+  <!-- Modal Structure -->
+  <div id="upload-modal" class="modal">
+    <div class="modal-content">
+      <form action="/add" enctype="multipart/form-data" method="POST" id="upload-form">
+        <h3>Upload a new image</h3>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Choose an image</span>
+            <input type="file" name="chosen-image">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="Select a file you would like to add to our system">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s2"><button type="submit" id="upload-button" class="btn blue">Upload</button></div>
+          <div class="col s10">
+            <div class="progress" style="margin-top:15px;">
+              <div class="indeterminate"></div>
+          </div>
+          </div>
+        </div>
+        
+        
+      </form>
+    </div>
+  </div>
+
+      <div id="hits">
+
+      </div>
+
+      <a class="btn-floating tooltipped btn-large waves-effect waves-light red button-position modal-trigger pulse" data-target="upload-modal" data-position="left" data-delay="50" data-tooltip="Click me to add new images!"><i class="material-icons">add</i></a>
+
+
+    </div>
+  </div>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0"></script>
+  <script src="/js/imagebox.js"></script>
+</body>
+</html>

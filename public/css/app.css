@@ -1,0 +1,78 @@
+h1, h3 {
+  font-family: 'Bungee Shade', cursive;
+}
+
+.image {
+  width: 150px;
+}
+
+.ais-search-box--input {
+  margin-top: 40px !important;
+  padding-left: 20px !important;
+  width: 96% !important;
+}
+
+.ais-search-box--reset {
+  top: 65px;
+  right: 220px;
+}
+
+.ais-search-box--magnifier {
+  top: 57px;
+  left: auto;
+}
+
+.ais-hits__empty {
+  text-align: center;
+  margin-top: 25%;
+}
+
+.button-position {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 0 20px 20px 0;
+}
+
+.red-toast {
+  background-color: red;
+}
+
+@media(max-width: 875px) {
+
+  h1 {
+    text-align: center;
+  }
+
+  .row .col.s6 {
+    width: 100%;
+  }
+
+  #search-box {
+    margin-top: -50px;
+  }
+
+  .ais-search-box--magnifier {
+    top: 120px;
+  }
+
+  .ais-search-box--reset {
+    top: 125px;
+    right: 75px;
+  }
+}
+
+@media(max-width: 600px) {
+
+  .card-action {
+    display:none;
+  }
+
+  .h3 {
+    font-size: 1.4rem;
+  }
+
+  .ais-search-box--reset {
+    display: none;
+  }
+}

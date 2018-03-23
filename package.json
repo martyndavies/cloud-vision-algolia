@@ -1,0 +1,23 @@
+{
+  "name": "cloud-vision-algolia",
+  "version": "1.0.0",
+  "description": "Demonstrating using Google's Cloud Vision API to classify images and make them searchable using Algolia",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "author": "Martyn Davies <martyn.davies@algolia.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/vision": "^0.17.0",
+    "algoliasearch": "^3.26.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.3",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {
+    "dotenv": "^5.0.1",
+    "nodemon": "^1.17.2"
+  }
+}
