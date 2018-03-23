@@ -1,11 +1,11 @@
 # ImageBox
 
 ## Whut?
-An image uploader and gallery that uses Google Cloud Platform's Vision API to classify the images that are submitted, and then makes them searchable using Algolia and InstantSearch.
+An image uploader and gallery that uses [Algolia](https://www.algolia.com/?utm_source=devreldemo&utm_medium=website&utm_campaign=imagebox-app) and [InstantSearch](https://community.algolia.com/instantsearch.js/?utm_source=devreldemo&utm_medium=website&utm_campaign=imagebox-app) to search through uploaded images that have been auto-classified by [Google Cloud Platform's Vision API](https://cloud.google.com/vision).
 
 ![What it could look like if you filled it with animal images...](https://cl.ly/2Q3m3w0X1M3Q/Image%202018-03-23%20at%2012.56.29%20pm.png)
 
-## Set up and install
+## Setup and install
 To work with your own version of this repo, you'll need to set up a few things in advance:
 
 * Algolia Account [(get a free one here)](https://www.algolia.com/?utm_source=devreldemo&utm_medium=website&utm_campaign=imagebox-app)
