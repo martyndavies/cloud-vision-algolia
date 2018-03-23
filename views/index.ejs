@@ -21,41 +21,45 @@
       </div>
     </div>
   
-  <!-- Modal Structure -->
-  <div id="upload-modal" class="modal">
-    <div class="modal-content">
-      <form action="/add" enctype="multipart/form-data" method="POST" id="upload-form">
-        <h3>Upload a new image</h3>
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>Choose an image</span>
-            <input type="file" name="chosen-image">
+    <!-- Modal Structure -->
+    <div id="upload-modal" class="modal">
+      <div class="modal-content">
+        <form action="/add" enctype="multipart/form-data" method="POST" id="upload-form">
+          <h3>Upload a new image</h3>
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Choose an image</span>
+              <input type="file" name="chosen-image">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Select a file you would like to add to our system">
+            </div>
           </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text" placeholder="Select a file you would like to add to our system">
+          <div class="row">
+            <div class="col s2"><button type="submit" id="upload-button" class="btn blue">Upload</button></div>
+            <div class="col s10">
+              <div class="progress" style="margin-top:15px;">
+                <div class="indeterminate"></div>
+            </div>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col s2"><button type="submit" id="upload-button" class="btn blue">Upload</button></div>
-          <div class="col s10">
-            <div class="progress" style="margin-top:15px;">
-              <div class="indeterminate"></div>
-          </div>
-          </div>
-        </div>
-        
-        
-      </form>
-    </div>
-  </div>
-
-      <div id="hits">
-
+          
+          
+        </form>
       </div>
+    </div>
+      
+    <!-- Search results go in here -->  
+    <div id="hits"></div>
 
-      <a class="btn-floating tooltipped btn-large waves-effect waves-light red button-position modal-trigger pulse" data-target="upload-modal" data-position="left" data-delay="50" data-tooltip="Click me to add new images!"><i class="material-icons">add</i></a>
-
-
+    <!-- Button to click to launch the upload modal -->
+    <a class="btn-floating tooltipped btn-large waves-effect waves-light red button-position modal-trigger pulse" data-target="upload-modal" data-position="left" data-delay="50" data-tooltip="Click me to add new images!"><i class="material-icons">add</i></a>
+    
+    <!-- Footer with attributions -->
+    <div class="row">
+      <div class="col s12 center footer-links">
+        Build by <a href="https://twitter.com/martynd">@martynd</a> using <a href="https://www.algolia.com/?utm_source=devreldemo&utm_medium=website&utm_campaign=imagebox-app">Algolia</a>, <a href="https://cloud.google.com/vision">Google Cloud Vision API</a> &amp; <a href="http://materializecss.com/">Materialize CSS</a>. <a href="https://github.com/martyndavies/cloud-vision-algolia">Source code on Github</a>.
+      </div>
     </div>
   </div>
   <script
