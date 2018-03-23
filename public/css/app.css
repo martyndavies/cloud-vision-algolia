@@ -38,6 +38,10 @@ h1, h3 {
   background-color: red;
 }
 
+.footer-links {
+  margin-top: 30px;
+}
+
 @media(max-width: 875px) {
 
   h1 {
