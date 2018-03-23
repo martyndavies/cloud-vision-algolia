@@ -4,8 +4,8 @@
   "description": "Demonstrating using Google's Cloud Vision API to classify images and make them searchable using Algolia",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "author": "Martyn Davies <martyn.davies@algolia.com>",
   "license": "MIT",
