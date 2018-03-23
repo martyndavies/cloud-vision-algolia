@@ -88,6 +88,9 @@ const addToAlgoliaIndex = (objectData, cb) => {
   });
 }
 
+/*  This is a helper function to convert RGBa to Hex.
+    I didn't write this bit, I found it in a JSFiddle,
+    so thanks https://jsfiddle.net/user/Mottie/ */
 const rgbaToHex = rgba => {
   rgba = rgba.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
   return (rgba && rgba.length === 4) ? "#" +
@@ -98,6 +101,7 @@ const rgbaToHex = rgba => {
 
 app.post('/add', (req, res) => {
 
+  // Outline our data object. This is what we'll add to and then push to Algolia.
   const algoliaData = {
     labels: [],
     upload_date: Date.now()
@@ -113,10 +117,16 @@ app.post('/add', (req, res) => {
 
         classifyImage(req.file.filename, (imageAttributes, imageColors) => {
 
+          // Set the filename
           algoliaData.image_url = `/images/${req.file.filename}`;
+
+          // Pull in the colors from Google Cloud Vision
           algoliaData.colors = imageColors;
+
+          // Select the most dominant color and convert it to a hex value
           algoliaData.most_dominant_color = rgbaToHex(`rgba(${imageColors[0].color.red},${imageColors[0].color.blue}, ${imageColors[0].color.green}, null)`);
 
+          // Loop through the classifcation labels and just retrieve the label and the score
           imageAttributes.forEach(attribute => {
             algoliaData.labels.push({
               classification: attribute.description,
@@ -124,13 +134,13 @@ app.post('/add', (req, res) => {
             });
           });
           
+          // Add the object we just created to Algolia
           addToAlgoliaIndex(algoliaData, (err, content) => {
             if (err) {
               res.json({
                 message: err
               });
             } else {
-              console.log('No error, returning to front end')
               res.json({
                 message: `Succesfully uploaded!`
               });
