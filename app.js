@@ -9,6 +9,13 @@ const path      = require('path');
 const client    = algolia(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADMIN_KEY);
 const index     = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
 
+// Set up the Algolia index to only search against the 'labels' attribute
+index.setSettings({
+  'searchableAttributes': [
+    'labels'
+  ]
+});
+
 // Set up Express
 const app = express();
 app.set('view engine', 'ejs');
@@ -62,6 +69,7 @@ const classifyImage = (image, cb) => {
   .labelDetection(imageToClassify)
   .then(results => {
     imageLabels = results[0].labelAnnotations;
+    console.log(imageLabels);
 
       // Also ask for the dominant colors to use as search attributes
       imageClient
