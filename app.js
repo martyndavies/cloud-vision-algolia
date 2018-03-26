@@ -69,7 +69,6 @@ const classifyImage = (image, cb) => {
   .labelDetection(imageToClassify)
   .then(results => {
     imageLabels = results[0].labelAnnotations;
-    console.log(imageLabels);
 
       // Also ask for the dominant colors to use as search attributes
       imageClient
