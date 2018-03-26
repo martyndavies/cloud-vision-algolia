@@ -1,3 +1,14 @@
+const search = instantsearch({
+  appId: 'CJFOM1IQCB',
+  apiKey: '28cf1d04351af30106b2619a97749040',
+  indexName: 'imagebox',
+  urlSync: true
+});
+
+const refreshItems = () => {
+  search.refresh();
+}
+
 // Find the modal element and set M.Modal on it
 const modalElem = document.querySelector('.modal');
 const modalInstance = M.Modal.init(modalElem, {
@@ -10,6 +21,11 @@ progressBar.style.display = 'none';
 
 // Upload button
 const uploadButton = document.getElementById('upload-button');
+
+uploadButton.addEventListener('click', e => {
+  uploadImage();
+  progressBar.style.display = 'block'
+});
 
 // Upload the chosen image
 function uploadImage(){
@@ -27,7 +43,7 @@ function uploadImage(){
         M.toast({html: `${data.message}`, displayLength: 4000});
         modalInstance.close();
         progressBar.style.display = 'none';
-        search.refresh();
+        refreshItems();
       } else {
         progressBar.style.display = 'none';
         M.toast({
@@ -39,19 +55,6 @@ function uploadImage(){
     });
   })
 }
-
-
-uploadButton.addEventListener('click', e => {
-  uploadImage();
-  progressBar.style.display = 'block'
-});
-
-const search = instantsearch({
-  appId: 'CJFOM1IQCB',
-  apiKey: '28cf1d04351af30106b2619a97749040',
-  indexName: 'imagebox',
-  urlSync: true
-});
 
 search.addWidget(
   instantsearch.widgets.hits({

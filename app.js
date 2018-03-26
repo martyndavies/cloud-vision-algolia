@@ -12,7 +12,7 @@ const index     = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
 // Set up the Algolia index to only search against the 'labels' attribute
 index.setSettings({
   'searchableAttributes': [
-    'labels'
+    'labels.classification'
   ]
 });
 
