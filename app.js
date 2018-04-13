@@ -164,6 +164,7 @@ app.post('/add', (req, res) => {
           // Add the object we just created to Algolia
           addToAlgoliaIndex(algoliaData, (err, content) => {
             if (err) {
+              console.log(err);
               res.json({
                 message: err
               });
