@@ -12,9 +12,11 @@ const index     = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
 
 const auth = require('http-auth');
 const basic = auth.basic({
-    realm: "Users",
-    file: __dirname + "/users.htpasswd"
-});
+    realm: "Users"
+  }, (username, password, cb) => {
+    cb(username === process.env.AUTH_USERNAME && password === process.env.AUTH_PASSWORD);
+  }
+);
 
 // Set up the Algolia index to only search against the 'labels' attribute
 index.setSettings({
