@@ -8,6 +8,7 @@ const multer    = require('multer');
 const s3        = require('multer-storage-s3');
 const ejs       = require('ejs');
 const path      = require('path');
+const port      = process.env.PORT || 8000
 
 const client    = algolia(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADMIN_KEY);
 const index     = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
@@ -181,6 +182,5 @@ app.post('/add', (req, res) => {
 
 })
 
-const port = 8000;
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
