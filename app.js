@@ -136,7 +136,6 @@ app.post('/add', (req, res) => {
 
   uploader(req, res, (err) => {
     if(err){
-      console.log(err);
       res.json({message: err});
     } else {
       if(req.file == undefined){
@@ -164,7 +163,6 @@ app.post('/add', (req, res) => {
           
           // Add the object we just created to Algolia
           addToAlgoliaIndex(algoliaData, (err, content) => {
-            console.log(algoliaData);
             if (err) {
               res.json({
                 message: err
