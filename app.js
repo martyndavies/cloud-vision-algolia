@@ -32,11 +32,12 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 
-// Set up our Image Annotator
+
+// Set up our Image Annotator, includes hacky fix for Heroku env var parsing of private key
 const imageClient = new vision.ImageAnnotatorClient({
   credentials: {
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    private_key: JSON.parse(process.env.GOOGLE_PRIVATE_KEY)
+    private_key: process.env.NODE_ENV !== 'production' ? process.env.GOOGLE_PRIVATE_KEY : JSON.parse(process.env.GOOGLE_PRIVATE_KEY)
   }
 });
 
