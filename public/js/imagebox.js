@@ -49,6 +49,14 @@ function uploadImage(){
           classes: 'red-toast'
         });    
       }
+    })
+    .catch(error => {
+      progressBar.style.display = 'none';
+      M.toast({
+        html: `${error}`,
+        displayLength: 4000,
+        classes: 'red-toast'
+      });  
     });
   })
 }
