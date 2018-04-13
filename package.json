@@ -4,7 +4,8 @@
   "description": "Demonstrating using Google's Cloud Vision API to classify images and make them searchable using Algolia",
   "main": "app.js",
   "engines": {
-    "node": "9.3.0"
+    "node": "9.3.0",
+    "npm": "5.8.0"
   },
   "scripts": {
     "dev": "nodemon app.js",
