@@ -40,7 +40,7 @@ function uploadImage(){
         modalInstance.close();
         progressBar.style.display = 'none';
         console.log('Refreshing...');
-        search.refresh();
+        setTimeout(() => {search.refresh()}, 2000);
       } else {
         progressBar.style.display = 'none';
         M.toast({
