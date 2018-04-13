@@ -1,4 +1,6 @@
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 const express   = require('express');
 const vision    = require('@google-cloud/vision');
 const algolia   = require('algoliasearch');
@@ -31,7 +33,12 @@ app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 
 // Set up our Image Annotator
-const imageClient = new vision.ImageAnnotatorClient();
+const imageClient = new vision.ImageAnnotatorClient({
+  credentials: {
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    private_key: process.env.GOOGLE_PRIVATE_KEY
+  }
+});
 
 // Set up where the uploaded images should live
 const storage = s3({
