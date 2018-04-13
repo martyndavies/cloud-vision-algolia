@@ -81,7 +81,7 @@ const classifyImage = (image, cb) => {
   let imageLabels;
   let dominantColors;
 
-  // Use the locally stored image from the upload Multer performs
+  // Use S3 stored image from the upload Multer performs
   const imageToClassify = `https://s3-eu-west-1.amazonaws.com/algolia-cloud-vision/images/${image}`;
 
   // Ask Google Vision what it thinks this is an image of
@@ -101,11 +101,11 @@ const classifyImage = (image, cb) => {
         cb(imageLabels, dominantColors);
       })
       .catch(err => {
-        console.error('Error:', err);
+        console.error('ImageClient Error:', err);
       })
   })
   .catch(err => {
-    console.error('Error:', err);
+    console.error('ImageClient Error:', err);
   });
 };
 
