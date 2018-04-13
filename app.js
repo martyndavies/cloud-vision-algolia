@@ -23,9 +23,8 @@ const basic = auth.basic({
 
 // Set up the Algolia index to only search against the 'labels' attribute
 index.setSettings({
-  'searchableAttributes': [
-    'labels.classification'
-  ]
+  'searchableAttributes': ['labels.classification'],
+  'customRanking': ['desc(upload_date)']
 });
 
 // Set up Express
