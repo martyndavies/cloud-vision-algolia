@@ -3,3 +3,4 @@ node_modules/*
 public/images/*.jpg
 google-service-account.json
 images/*
+users.htpasswd

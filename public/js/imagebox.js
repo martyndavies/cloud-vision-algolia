@@ -5,10 +5,6 @@ const search = instantsearch({
   urlSync: true
 });
 
-const refreshItems = () => {
-  search.refresh();
-}
-
 // Find the modal element and set M.Modal on it
 const modalElem = document.querySelector('.modal');
 const modalInstance = M.Modal.init(modalElem, {
@@ -43,7 +39,8 @@ function uploadImage(){
         M.toast({html: `${data.message}`, displayLength: 4000});
         modalInstance.close();
         progressBar.style.display = 'none';
-        refreshItems();
+        console.log('Refreshing...');
+        search.refresh();
       } else {
         progressBar.style.display = 'none';
         M.toast({

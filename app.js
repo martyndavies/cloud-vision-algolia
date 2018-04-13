@@ -3,11 +3,18 @@ const express   = require('express');
 const vision    = require('@google-cloud/vision');
 const algolia   = require('algoliasearch');
 const multer    = require('multer');
+const s3        = require('multer-storage-s3');
 const ejs       = require('ejs');
 const path      = require('path');
 
 const client    = algolia(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADMIN_KEY);
 const index     = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
+
+const auth = require('http-auth');
+const basic = auth.basic({
+    realm: "Users",
+    file: __dirname + "/users.htpasswd"
+});
 
 // Set up the Algolia index to only search against the 'labels' attribute
 index.setSettings({
@@ -25,11 +32,15 @@ app.use(express.static('./public'));
 const imageClient = new vision.ImageAnnotatorClient();
 
 // Set up where the uploaded images should live
-const storage = multer.diskStorage({
-  destination: './public/images/',
-  filename: function(req, file, cb){
-    cb(null, Date.now() + '-' + path.parse(file.originalname).name + path.extname(file.originalname));
-  }
+const storage = s3({
+  destination: (req, file, cb) => {
+    cb(null, 'images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+  bucket: 'algolia-cloud-vision',
+  region: 'eu-west-1'
 });
 
 // Define an uploader and settings
@@ -44,7 +55,7 @@ const uploader = multer({
 // Check whether the file is an image
 function isFileAllowed(file, cb){
   const filetypes = /jpeg|jpg|png|gif/;
-  const extensionName = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const extensionName = filetypes.test(file.originalname.split('.')[1].toLowerCase());
   const mimetype = filetypes.test(file.mimetype);
 
   if(mimetype && extensionName){
@@ -54,7 +65,7 @@ function isFileAllowed(file, cb){
   }
 }
 
-app.get('/', (req, res) => res.render('index'));
+app.get('/', auth.connect(basic), (req, res) => res.render('index'));
 
 const classifyImage = (image, cb) => {
   
@@ -62,7 +73,7 @@ const classifyImage = (image, cb) => {
   let dominantColors;
 
   // Use the locally stored image from the upload Multer performs
-  const imageToClassify = `./public/images/${image}`;
+  const imageToClassify = `https://s3-eu-west-1.amazonaws.com/algolia-cloud-vision/images/${image}`;
 
   // Ask Google Vision what it thinks this is an image of
   imageClient
@@ -125,7 +136,7 @@ app.post('/add', (req, res) => {
         classifyImage(req.file.filename, (imageAttributes, imageColors) => {
 
           // Set the filename
-          algoliaData.image_url = `/images/${req.file.filename}`;
+          algoliaData.image_url = `https://s3-eu-west-1.amazonaws.com/algolia-cloud-vision/images/${req.file.filename}`;
 
           // Pull in the colors from Google Cloud Vision
           algoliaData.colors = imageColors;
